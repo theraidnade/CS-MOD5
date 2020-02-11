@@ -66,8 +66,21 @@ public class Cemetery
     */
    public static Person[] readIntoArray (File f, int num)
    {
-       private String[] people;
-       
+       Person[] people = new Person[num];
+       try
+       {
+           Scanner scan = new Scanner(f);
+           for(int x=0;x < people.length;x++)
+           while (scan.hasNextLine())
+               {
+                   people[x] = makePerson(scan.nextLine());
+               }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Check file name");
+       }
+       return people;
    }
    
    /* A helper method that instantiates one Person object.
@@ -77,7 +90,7 @@ public class Cemetery
    {
        String currentName = entry.substring(0,25);
        String currentBurialDate = entry.substring(25,36);
-       String currentAge = //write code here!
+       String currentAge = entry.substring(37,41);
        return new Person(currentName, currentBurialDate, currentAge);
    }  
    
@@ -87,7 +100,14 @@ public class Cemetery
     */
    public static int locateMinAgePerson(Person[] arr)
    {
-   
+       int ind = 0;
+       for(int y = 0;y<arr.length;y++)
+       {
+           {
+               
+           }
+       }
+       return ind;
    }   
    
    /* Finds and returns the location (the index) of the Person
@@ -97,15 +117,16 @@ public class Cemetery
    public static int locateMaxAgePerson(Person[] arr)
    {
    
+       return 0;
    }        
 }
 
 class Person
 {
    //// FIELDS ////
-   
-   /* Declare fields for the name, the burial date, and the age. */
-      
+   private String name = "";
+   private String burialDate = "";
+   private double age = 0;   
    ////// CONSTRUCTOR //////
    
    /* @param n -- a String representing a name from the input file.
@@ -137,11 +158,14 @@ class Person
        }
        else if(a.contains("d"))
        {
-           //write code here!
+           int pos1 = a.indexOf("d");
+           double numDays = Double.parseDouble(a.substring(0,pos1));
+           numericalAge = numDays/365.0;
        }
        else
        {
-           //write code here!
+           double AgeOther = Double.parseDouble(a.trim());
+           numericalAge = AgeOther;
        }
        return numericalAge;
    }
@@ -151,5 +175,17 @@ class Person
    /* Write 3 accessor methods for the fields of the Person class.
     * (See the main method in the Cemetery class.)
     */
+   public double getAge()
+   {
+       return age;
+   }
+   public String getBurialDate()
+   {
+       return burialDate;
+   }
+   public String getName()
+   {
+       return name;
+   }
    
 } 
