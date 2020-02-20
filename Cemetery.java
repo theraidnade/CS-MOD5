@@ -1,7 +1,7 @@
 /**
  * Module 5 Project: Cemetery
  *
- * Name: 
+ * Name: Phillip Dickey
  * 
  * AP Computer Science, Virtual Virginia
  */
@@ -12,6 +12,18 @@ import java.text.DecimalFormat;
 
 public class Cemetery
 {
+    private int janAmount = 0;
+    private int febAmount = 0;
+    private int marAmount = 0;
+    private int aprAmount = 0;
+    private int mayAmount = 0;
+    private int junAmount = 0;
+    private int julAmount = 0;
+    private int augAmount = 0;
+    private int sepAmount = 0;
+    private int octAmount = 0;
+    private int novAmount = 0;
+    private int decAmount = 0;
    //////// MAIN ////////
    public static void main (String [] args)
    {
@@ -20,8 +32,8 @@ public class Cemetery
       Person[] cemetery = readIntoArray(file, numEntries); 
       
       //TESTING ONLY: un-comment the 2 lines below to see if array was created properly
-      for (int i = 0; i < cemetery.length; i++) 
-        System.out.println(cemetery[i].getName() + " " + cemetery[i].getAge());
+      //for (int i = 0; i < cemetery.length; i++) 
+        //System.out.println(cemetery[i].getName() + " " + cemetery[i].getAge());
       
       int min = locateMinAgePerson(cemetery);
       int max = locateMaxAgePerson(cemetery); 
@@ -29,7 +41,7 @@ public class Cemetery
       System.out.println("Name of youngest person: " + cemetery[min].getName());
       System.out.println("Age of youngest person: " + cemetery[min].getAge());    
       System.out.println("Name of oldest person: " + cemetery[max].getName());
-      System.out.println("Age of oldest person: " + cemetery[max].getAge());     
+      System.out.println("Age of oldest person: " + cemetery[max].getAge());      
    }
    
    //////// METHODS (Cemetery) ////////
@@ -135,7 +147,101 @@ public class Cemetery
            }
        }
        return arrCount2;
-   }        
+   }
+   /* This is my level 2 stuff.  It scans the list for the 
+    * amount of people buried on the same month and then returns
+    * that data.
+    */
+   public void monthAmount(File f, int num)
+   {
+       int i = 0;
+       String[] month = new String[num];
+       try
+       {
+           Scanner scan = new Scanner(f);
+           for(int k=0;k<month.length;k++)
+           {
+               if (scan.hasNextLine())
+               {
+                   String temp3 = "";
+                   temp3 = scan.nextLine();
+                   month[k] = temp3.substring(28,31);
+               }
+           }
+           for(int u=0;u<month.length;u++)
+           {
+
+               if(month[u].equals("Jan"))
+               {
+                  janAmount++; 
+               }
+               else if(month[u].equals("Feb"))
+               {
+                   febAmount++;
+               }
+               else if(month[u].equals("Mar"))
+               {
+                   marAmount++;
+               }
+               else if(month[u].equals("Apr"))
+               {
+                   aprAmount++;
+               }
+               else if(month[u].equals("May"))
+               {
+                   mayAmount++;
+               }
+               else if(month[u].equals("Jun"))
+               {
+                   junAmount++;
+               }
+               else if(month[u].equals("Jul"))
+               {
+                   julAmount++;
+               }
+               else if(month[u].equals("Aug"))
+               {
+                   augAmount++;
+               }
+               else if(month[u].equals("Sep"))
+               {
+                   sepAmount++;
+               }
+               else if(month[u].equals("Oct"))
+               {
+                   octAmount++;
+               }
+               else if(month[u].equals("Nov"))
+               {
+                   novAmount++;
+               }
+               else
+               {
+                   decAmount++;
+               }
+           }
+       }
+       
+       catch (Exception e)
+       {
+           System.out.println("Check filename.");
+       }       
+   }
+   public void displayMonthValues()
+   {
+      System.out.println("Amount of people born in January: " + janAmount);
+      System.out.println("Amount of people born in February: " + febAmount);
+      System.out.println("Amount of people born in March: " + marAmount);
+      System.out.println("Amount of people born in April: " + aprAmount);
+      System.out.println("Amount of people born in May: " + mayAmount);
+      System.out.println("Amount of people born in June: " + junAmount);   
+      System.out.println("Amount of people born in July: " + julAmount);
+      System.out.println("Amount of people born in August: " + augAmount);
+      System.out.println("Amount of people born in September: " + sepAmount);
+      System.out.println("Amount of people born in October: " + octAmount);
+      System.out.println("Amount of people born in November: " + novAmount);
+      System.out.println("Amount of people born in December: " + decAmount);
+   }
 }
 
 class Person

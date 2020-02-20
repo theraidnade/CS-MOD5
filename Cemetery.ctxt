@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Cemetery
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=f
+comment2.target=int\ countEntries(java.io.File)
+comment2.text=\ Counts\ and\ returns\ the\ number\ of\ entries\ in\ File\ f.\r\n\ Uses\ a\ try-catch\ block.\ \ \ \r\n\ @param\ f\ --\ the\ file\ object\r\n
+comment3.params=f\ num
+comment3.target=Person[]\ readIntoArray(java.io.File,\ int)
+comment3.text=\ Reads\ the\ data.\r\n\ Fills\ the\ array\ with\ Person\ objects.\r\n\ Uses\ a\ try-catch\ block.\ \ \ \r\n\ @param\ f\ --\ the\ file\ object\ \r\n\ \ \ \ \ \ \ \ num\ --\ the\ number\ of\ lines\ in\ the\ File\ f\ \ \r\n
+comment4.params=entry
+comment4.target=Person\ makePerson(java.lang.String)
+comment4.text=\ A\ helper\ method\ that\ instantiates\ one\ Person\ object.\r\n\ @param\ entry\ --\ one\ line\ of\ the\ input\ file.\r\n
+comment5.params=arr
+comment5.target=int\ locateMinAgePerson(Person[])
+comment5.text=\ Finds\ and\ returns\ the\ location\ (the\ index)\ of\ the\ Person\r\n\ who\ is\ the\ youngest.\r\n\ @param\ arr\ --\ an\ array\ of\ Person\ objects.\r\n
+comment6.params=arr
+comment6.target=int\ locateMaxAgePerson(Person[])
+comment6.text=\ Finds\ and\ returns\ the\ location\ (the\ index)\ of\ the\ Person\r\n\ \ \ \ \ \ who\ is\ the\ oldest.\r\n\ \ \ \ \ \ @param\ arr\ --\ an\ array\ of\ Person\ objects.\r\n
+comment7.params=f\ num
+comment7.target=void\ monthAmount(java.io.File,\ int)
+comment7.text=\ This\ is\ my\ level\ 2\ stuff.\ \ It\ scans\ the\ list\ for\ the\ \r\n\ amount\ of\ people\ buried\ on\ the\ same\ month\ and\ then\ returns\r\n\ that\ data.\r\n
+comment8.params=
+comment8.target=void\ displayMonthValues()
+numComments=9
