@@ -20,8 +20,8 @@ public class Cemetery
       Person[] cemetery = readIntoArray(file, numEntries); 
       
       //TESTING ONLY: un-comment the 2 lines below to see if array was created properly
-      //for (int i = 0; i < cemetery.length; i++) 
-        //System.out.println(cemetery[i].getName() + " " + cemetery[i].getAge());
+      for (int i = 0; i < cemetery.length; i++) 
+        System.out.println(cemetery[i].getName() + " " + cemetery[i].getAge());
       
       int min = locateMinAgePerson(cemetery);
       int max = locateMaxAgePerson(cemetery); 
@@ -64,22 +64,27 @@ public class Cemetery
     * @param f -- the file object 
     *        num -- the number of lines in the File f  
     */
-   public static Person[] readIntoArray (File f, int num)
+   public static Person[] readIntoArray (File f, int num) 
    {
        Person[] people = new Person[num];
+       int count = 0;
        try
        {
            Scanner scan = new Scanner(f);
-           for(int x=0;x < people.length;x++)
-           while (scan.hasNextLine())
+           for(int g = 0;g<people.length;g++)
+           {
+               if(scan.hasNextLine())
                {
-                   people[x] = makePerson(scan.nextLine());
+                   String temp = scan.nextLine();
+                   people[g] = makePerson(temp);
                }
+           }
        }
-       catch(Exception e)
+       catch (Exception e)
        {
-           System.out.println("Check file name");
+           System.out.println("Check filename.");
        }
+       
        return people;
    }
    
@@ -100,14 +105,17 @@ public class Cemetery
     */
    public static int locateMinAgePerson(Person[] arr)
    {
-       int ind = 0;
+       double young = 200;
+       int arrCount = 0;
        for(int y = 0;y<arr.length;y++)
        {
+           if(arr[y].getAge() < young)
            {
-               
+               young = arr[y].getAge();
+               arrCount = y;
            }
        }
-       return ind;
+       return arrCount;
    }   
    
    /* Finds and returns the location (the index) of the Person
@@ -116,8 +124,17 @@ public class Cemetery
     */
    public static int locateMaxAgePerson(Person[] arr)
    {
-   
-       return 0;
+       double old = 0;
+       int arrCount2 = 0;
+       for(int z = 0;z<arr.length;z++)
+       {
+           if(arr[z].getAge() > old)
+           {
+               old = arr[z].getAge();
+               arrCount2 = z;
+           }
+       }
+       return arrCount2;
    }        
 }
 
