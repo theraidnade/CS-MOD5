@@ -1,7 +1,7 @@
 /**
  * Module 5 Project: Cemetery
  *
- * Name: 
+ * Name: Phillip Dickey
  * 
  * AP Computer Science, Virtual Virginia
  */
@@ -17,7 +17,10 @@ public class Cemetery
    {
       File file = new File("cemetery.txt");
       int numEntries = countEntries(file);
-      Person[] cemetery = readIntoArray(file, numEntries); 
+      Person[] cemetery = readIntoArray(file, numEntries);
+      /*Additions to my main method for level 2*/
+      int[] monthNums = monthAmount(file, numEntries);
+      String[] cal = makeCalendar();
       
       //TESTING ONLY: un-comment the 2 lines below to see if array was created properly
       //for (int i = 0; i < cemetery.length; i++) 
@@ -29,7 +32,13 @@ public class Cemetery
       System.out.println("Name of youngest person: " + cemetery[min].getName());
       System.out.println("Age of youngest person: " + cemetery[min].getAge());    
       System.out.println("Name of oldest person: " + cemetery[max].getName());
-      System.out.println("Age of oldest person: " + cemetery[max].getAge());     
+      System.out.println("Age of oldest person: " + cemetery[max].getAge());
+      /*Additions to my main method for level 2*/
+      System.out.println("Amount of burials per month:");
+      for(int fin = 0;fin < monthNums.length;fin++)
+      {
+          System.out.println(cal[fin] + ":" + " " + monthNums[fin]);
+      }
    }
    
    //////// METHODS (Cemetery) ////////
@@ -64,22 +73,26 @@ public class Cemetery
     * @param f -- the file object 
     *        num -- the number of lines in the File f  
     */
-   public static Person[] readIntoArray (File f, int num)
+   public static Person[] readIntoArray (File f, int num) 
    {
        Person[] people = new Person[num];
+       int count = 0;
        try
        {
            Scanner scan = new Scanner(f);
-           for(int x=0;x < people.length;x++)
-           while (scan.hasNextLine())
+           for(int g = 0;g<people.length;g++)
+           {
+               if(scan.hasNextLine())
                {
-                   people[x] = makePerson(scan.nextLine());
+                   String temp = scan.nextLine();
+                   people[g] = makePerson(temp);
                }
+           }
        }
-       catch(Exception e)
+       catch (Exception e)
        {
-           System.out.println("Check file name");
-       }
+           System.out.println("Check filename.");
+       }       
        return people;
    }
    
@@ -92,7 +105,7 @@ public class Cemetery
        String currentBurialDate = entry.substring(25,36);
        String currentAge = entry.substring(37,41);
        return new Person(currentName, currentBurialDate, currentAge);
-   }  
+   }
    
    /* Finds and returns the location (the index) of the Person
     * who is the youngest.
@@ -100,14 +113,17 @@ public class Cemetery
     */
    public static int locateMinAgePerson(Person[] arr)
    {
-       int ind = 0;
+       double young = 200;
+       int arrCount = 0;
        for(int y = 0;y<arr.length;y++)
        {
+           if(arr[y].getAge() < young)
            {
-               
+               young = arr[y].getAge();
+               arrCount = y;
            }
        }
-       return ind;
+       return arrCount;
    }   
    
    /* Finds and returns the location (the index) of the Person
@@ -116,9 +132,105 @@ public class Cemetery
     */
    public static int locateMaxAgePerson(Person[] arr)
    {
+       double old = 0;
+       int arrCount2 = 0;
+       for(int z = 0;z<arr.length;z++)
+       {
+           if(arr[z].getAge() > old)
+           {
+               old = arr[z].getAge();
+               arrCount2 = z;
+           }
+       }
+       return arrCount2;
+   }
    
-       return 0;
-   }        
+   /* This is my level 2 stuff.  It scans the list for the 
+    * amount of people buried on the same month and then returns
+    * that data.
+    */
+   public static int[] monthAmount(File f, int num)
+   {
+       int[] monthNum = new int[12];
+       int i = 0;
+       String[] month = new String[num];
+       try
+       {
+           Scanner scan = new Scanner(f);
+           for(int k=0;k<month.length;k++)
+           {
+               if (scan.hasNextLine())
+               {
+                   String temp3 = "";
+                   temp3 = scan.nextLine();
+                   month[k] = temp3.substring(28,31);
+               }
+           }
+           for(int u=0;u<month.length;u++)
+           {
+               if(month[u].equals("Jan"))
+               {
+                  monthNum[0] += 1; 
+               }
+               else if(month[u].equals("Feb"))
+               {
+                   monthNum[1] += 1;
+               }
+               else if(month[u].equals("Mar"))
+               {
+                   monthNum[2] += 1;
+               }
+               else if(month[u].equals("Apr"))
+               {
+                   monthNum[3] += 1;
+               }
+               else if(month[u].equals("May"))
+               {
+                   monthNum[4] += 1;
+               }
+               else if(month[u].equals("Jun"))
+               {
+                   monthNum[5] += 1;
+               }
+               else if(month[u].equals("Jul"))
+               {
+                   monthNum[6] += 1;
+               }
+               else if(month[u].equals("Aug"))
+               {
+                   monthNum[7] += 1;
+               }
+               else if(month[u].equals("Sep"))
+               {
+                   monthNum[8] += 1;
+               }
+               else if(month[u].equals("Oct"))
+               {
+                   monthNum[9] += 1;
+               }
+               else if(month[u].equals("Nov"))
+               {
+                   monthNum[10] += 1;
+               }
+               else
+               {
+                   monthNum[11] += 1;
+               }
+           }
+       }
+       
+       catch (Exception e)
+       {
+           System.out.println("Check filename.");
+       }
+       return monthNum;
+   }
+   
+   public static String[] makeCalendar()
+   {
+       String[] calMonth = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+       return calMonth;
+   }
 }
 
 class Person
@@ -187,5 +299,4 @@ class Person
    {
        return name;
    }
-   
-} 
+ }
