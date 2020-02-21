@@ -12,24 +12,14 @@ import java.text.DecimalFormat;
 
 public class Cemetery
 {
-    private int janAmount = 0;
-    private int febAmount = 0;
-    private int marAmount = 0;
-    private int aprAmount = 0;
-    private int mayAmount = 0;
-    private int junAmount = 0;
-    private int julAmount = 0;
-    private int augAmount = 0;
-    private int sepAmount = 0;
-    private int octAmount = 0;
-    private int novAmount = 0;
-    private int decAmount = 0;
    //////// MAIN ////////
    public static void main (String [] args)
    {
       File file = new File("cemetery.txt");
       int numEntries = countEntries(file);
-      Person[] cemetery = readIntoArray(file, numEntries); 
+      Person[] cemetery = readIntoArray(file, numEntries);
+      //int[] monthNums = monthAmount(file, numEntries);
+      //String[] cal = makeCalendar();
       
       //TESTING ONLY: un-comment the 2 lines below to see if array was created properly
       //for (int i = 0; i < cemetery.length; i++) 
@@ -41,7 +31,11 @@ public class Cemetery
       System.out.println("Name of youngest person: " + cemetery[min].getName());
       System.out.println("Age of youngest person: " + cemetery[min].getAge());    
       System.out.println("Name of oldest person: " + cemetery[max].getName());
-      System.out.println("Age of oldest person: " + cemetery[max].getAge());      
+      System.out.println("Age of oldest person: " + cemetery[max].getAge());
+      /*for(int fin = 0;fin < monthNums.length;fin++)
+      {
+          System.out.println(cal[fin] + ":" + " " + monthNums[fin]);
+      }*/
    }
    
    //////// METHODS (Cemetery) ////////
@@ -109,7 +103,7 @@ public class Cemetery
        String currentBurialDate = entry.substring(25,36);
        String currentAge = entry.substring(37,41);
        return new Person(currentName, currentBurialDate, currentAge);
-   }  
+   }
    
    /* Finds and returns the location (the index) of the Person
     * who is the youngest.
@@ -148,12 +142,14 @@ public class Cemetery
        }
        return arrCount2;
    }
+   
    /* This is my level 2 stuff.  It scans the list for the 
     * amount of people buried on the same month and then returns
     * that data.
     */
-   public void monthAmount(File f, int num)
+   /*public static int[] monthAmount(File f, int num)
    {
+       int[] monthNum = new int[12];
        int i = 0;
        String[] month = new String[num];
        try
@@ -170,54 +166,53 @@ public class Cemetery
            }
            for(int u=0;u<month.length;u++)
            {
-
                if(month[u].equals("Jan"))
                {
-                  janAmount++; 
+                  monthNum[0] += 1; 
                }
                else if(month[u].equals("Feb"))
                {
-                   febAmount++;
+                   monthNum[1] += 1;
                }
                else if(month[u].equals("Mar"))
                {
-                   marAmount++;
+                   monthNum[2] += 1;
                }
                else if(month[u].equals("Apr"))
                {
-                   aprAmount++;
+                   monthNum[3] += 1;
                }
                else if(month[u].equals("May"))
                {
-                   mayAmount++;
+                   monthNum[4] += 1;
                }
                else if(month[u].equals("Jun"))
                {
-                   junAmount++;
+                   monthNum[5] += 1;
                }
                else if(month[u].equals("Jul"))
                {
-                   julAmount++;
+                   monthNum[6] += 1;
                }
                else if(month[u].equals("Aug"))
                {
-                   augAmount++;
+                   monthNum[7] += 1;
                }
                else if(month[u].equals("Sep"))
                {
-                   sepAmount++;
+                   monthNum[8] += 1;
                }
                else if(month[u].equals("Oct"))
                {
-                   octAmount++;
+                   monthNum[9] += 1;
                }
                else if(month[u].equals("Nov"))
                {
-                   novAmount++;
+                   monthNum[10] += 1;
                }
                else
                {
-                   decAmount++;
+                   monthNum[11] += 1;
                }
            }
        }
@@ -225,24 +220,15 @@ public class Cemetery
        catch (Exception e)
        {
            System.out.println("Check filename.");
-       }       
+       }
+       return monthNum;
    }
-   public void displayMonthValues()
+   
+   public static String[] makeCalendar()
    {
-      System.out.println("Amount of people born in January: " + janAmount);
-      System.out.println("Amount of people born in February: " + febAmount);
-      System.out.println("Amount of people born in March: " + marAmount);
-      System.out.println("Amount of people born in April: " + aprAmount);
-      System.out.println("Amount of people born in May: " + mayAmount);
-      System.out.println("Amount of people born in June: " + junAmount);   
-      System.out.println("Amount of people born in July: " + julAmount);
-      System.out.println("Amount of people born in August: " + augAmount);
-      System.out.println("Amount of people born in September: " + sepAmount);
-      System.out.println("Amount of people born in October: " + octAmount);
-      System.out.println("Amount of people born in November: " + novAmount);
-      System.out.println("Amount of people born in December: " + decAmount);
-   }
-}
+       String[] calMonth = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+       return calMonth;
+   } */
 
 class Person
 {
@@ -310,5 +296,5 @@ class Person
    {
        return name;
    }
-   
-} 
+ }
+}
